@@ -1,13 +1,26 @@
 // Services
 const hyprland = await Service.import("hyprland")
 
-
+/***************/
 // Polling functions
-//const time = Variable('', {
-//    poll: [1000, function() {
-//        return Date().toString()
-//    }],
-//})
+/***************/
+const time = Variable('', {
+    poll: [1000, function() {
+        let now = new Date()
+        let options = {
+            hourCycle: 'h23',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }
+        let formattedDate = now.toLocaleDateString("en-ca", options)
+        return formattedDate
+    }],
+})
+
 
 /************/
 // WIDGETS
@@ -28,19 +41,15 @@ const Workspaces = () => {
     })
 }
 
-//const ClockWidget = () => Widget.Label({
-//    className: 'clock',
-//    connections: [
-//        // this is bad practice, since exec() will block the main event loop
-//        // in the case of a simple date its not really a problem
-//        [1000, self => self.label = exec('date "+%H:%M:%S %b %e."')],
-//
-//        // this is what you should do
-//        [1000, self => execAsync(['date', '+%H:%M:%S %b %e.'])
-//            .then(date => self.label = date).catch(console.error)],
-//    ],
-//});
-//
+const Clock = () => {
+    return Widget.Label({
+        className: "clock",
+        label: time.bind(),
+    })
+}
+
+
+
 ////const NotificationsWidget = () => Widget.Box({
 ////    className: 'notification',
 ////    children: [
@@ -126,10 +135,11 @@ const Workspaces = () => {
 //});
 //
 function Power(){
-    return Widget.Label({
+    return Widget.Button({
         className: "power",
-        label: "Test",
-        
+        child: Widget.Icon({
+            icon: "NixOS"
+        }),
     })
 }
 
@@ -151,9 +161,10 @@ function Left(){
 // Center widget
 function Center(){
     return Widget.Box({
+        className: 'center-widget',
         spacing: 8,
         children: [
-            //ClockWidget(),
+            Clock(),
             //MediaWidget(),
         ],
     })
@@ -196,5 +207,17 @@ App.config({
     windows: [
         Bar(0)
     ],
+    onConfigParsed: function() {
+        // Auto reloading of CSS file
+        Utils.monitorFile(
+            './style.css',
+            function(){
+                const cssFile = './style.css'
+
+                App.resetCss()
+                App.applyCss(cssFile)
+            },
+        )
+    },
 })
 
