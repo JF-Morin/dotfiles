@@ -1,7 +1,7 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function ()
+    config = function()
         local config = require('nvim-treesitter.configs')
         config.setup({
             ensure_installed = {
@@ -21,6 +21,7 @@ return {
                 'json',
                 'lua',
                 'markdown_inline',
+                'nix',
                 'python',
                 'regex',
                 'rust',
