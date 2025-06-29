@@ -1,3 +1,7 @@
 return {
-    require('mini.icons').setup({})
-}
+        'echasnovski/mini.icons',
+        version = false,
+        opts = {
+
+            }
+    }

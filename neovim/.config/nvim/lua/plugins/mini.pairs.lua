@@ -1,3 +1,5 @@
 return {
-    require('mini.pairs').setup({})
+    'echasnovski/mini.pairs',
+    version = false,
+    opts = {}
 }
