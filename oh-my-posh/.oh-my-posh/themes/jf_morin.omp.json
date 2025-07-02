@@ -10,9 +10,9 @@
             "cache_duration": "none"
           },
           "leading_diamond": "\u256d\u2500\ue0b6",
-          "template": "\ueb99 {{ .UserName }} ",
+          "template": "\uf313 {{ .UserName }} ",
           "foreground": "#ffffff",
-          "background": "#0077c2",
+          "background": "#444444",
           "type": "shell",
           "style": "diamond"
         },
@@ -34,8 +34,8 @@
           },
           "template": " {{ .Path }} ",
           "foreground": "#E4E4E4",
+          "background": "#0077c2",
           "powerline_symbol": "\ue0b0",
-          "background": "#444444",
           "type": "path",
           "style": "powerline"
         },
